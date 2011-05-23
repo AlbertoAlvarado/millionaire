@@ -28,6 +28,7 @@ public class MillionaireGUI {
 		
 		question.add(questionField);
 		answerA.add(answerAButton);
+		//fun
 		answerB.add(answerBButton);
 		answerC.add(answerCButton);
 		answerD.add(answerDButton);
