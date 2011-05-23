@@ -28,7 +28,8 @@ public class MillionaireGUI {
 		
 		question.add(questionField);
 		answerA.add(answerAButton);
-		//fun
+		ActionListener listener = new MyActionListener();
+		answerAButton.addActionListener(listener);
 		answerB.add(answerBButton);
 		answerC.add(answerCButton);
 		answerD.add(answerDButton);
@@ -41,6 +42,13 @@ public class MillionaireGUI {
 		f.getContentPane().add(answerD);	
 	}
 	
+	public class MyActionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("HELLO WORLD");
+		}	
+		
+	}
 	public void launchFrame () {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.pack();
