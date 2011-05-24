@@ -5,7 +5,20 @@ public class GameManager {
 	private boolean lifeline1Used;
 	private boolean lifeline2Used;
 	private boolean lifeline3Used;
+	private QuestionList qlist;
+	private int index;
 	private Question q;
+	
+	public GameManager (QuestionList qlist) {
+		this.index = 0;
+		currentLevel = index + 1;
+		winnings = 0;
+		lifeline1Used = false;
+		lifeline2Used = false;
+		lifeline3Used = false;
+		this.qlist = qlist;
+		this.q = qlist.getList().get(index);
+	}
 	
 	/*
 	 * public void lifelinePressed () {
@@ -13,26 +26,30 @@ public class GameManager {
 	 * 		change answer choices
 	 */
 	
-	/*
-	 * public void answerPressed (answer choice a/b/c/d) {
-	 * 		determine if answer is correct
-	 * 		if yes:
-	 * 			print CONGRATS screen
-	 * 			currentLevel ++
-	 * 			winnings +
-	 * 			change question
-	 * 		if no:
-	 * 			print WRONG screen
-	 * 			display winnings
-	 * 			end game
-	 */
+	public void correct () {
+		currentLevel ++;
+		winnings ++;
+		index ++;
+		setQ(index);
+	}
+	
+	public void incorrect () {
+		if (currentLevel <= 5) {
+			winnings = 0;
+		} else if (currentLevel >= 6 && currentLevel <= 10) {
+			winnings = 5;
+		} else if (currentLevel >= 11) {
+			winnings = 10;
+		}
+	}
 	
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
 	
 	public int getWinnings() {
-		return winnings;
+		int[] list = {0, 100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
+		return list[winnings];
 	}
 
 	public boolean isLifeline1Used() {
@@ -48,11 +65,18 @@ public class GameManager {
 	}
 
 	public Question getQ() {
-		return q;
+		return qlist.getList().get(index);
 	}
 	
-	public void setQ(Question q) {
-		this.q = q;
+	public void setQ (int index) {
+		this.q = qlist.getList().get(index);
 	}
 	
+	public QuestionList getQuestionList () {
+		return qlist;
+	}
+	
+	public int getIndex () {
+		return index;
+	}
 }
