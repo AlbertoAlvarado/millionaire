@@ -15,7 +15,7 @@ public class MillionaireFileReading {
 	
 	public static QuestionList readFile (Scanner console) throws FileNotFoundException {
 		QuestionList qList = new QuestionList();
-		File data = new File ("src/Questions");
+		File data = new File ("src/MASTER_QUESTIONS");
 		Scanner fileScan = new Scanner(data);
 
 		
