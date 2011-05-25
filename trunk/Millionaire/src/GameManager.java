@@ -56,14 +56,26 @@ public class GameManager {
 		return lifeline1Used;
 	}
 	
+	public void Lifeline1Used() {
+		lifeline1Used = true;
+	}
+	
 	public boolean isLifeline2Used() {
 		return lifeline2Used;
 	}
 
+	public void Lifeline2Used() {
+		lifeline2Used = true;
+	}
+	
 	public boolean isLifeline3Used() {
 		return lifeline3Used;
 	}
-
+	
+	public void Lifeline3Used() {
+		lifeline3Used = true;
+	}
+	
 	public Question getQ() {
 		return qlist.getList().get(index);
 	}
