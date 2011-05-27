@@ -267,7 +267,9 @@ public class MillionaireGUI {
 		 */
 		String audienceAnswer = "";
 		int confidenceLevel = 97 + ((gm.getQ().getLevel()-1) * -5);
+		System.out.println(confidenceLevel);
 		int random = (int) (100 * Math.random() + 1);
+		System.out.println(random);
 		if (random < confidenceLevel) {
 			audienceAnswer = gm.getQ().getCorrectAnswer();
 		} else {
@@ -289,15 +291,18 @@ public class MillionaireGUI {
 		String[] experts = {"Emile Gleeson", "George Matter", "Ms. Martin", "Bill Nye", "Jared from Subway", "Mr. Rogers", "Barack Obama", "Steve Jobs", "Donald Trump", "Malcolm Gladwell", "Mr. Truax", "Albert Einstein", "Ichiro", "Mr. Carpenter", "Grant Brosndon", "Erik Carlson", "Mr. Kastl", "Billy Mays", "Oprah Winfrey", "Dr. Phil", "Bob Barker", "Shirley Temple", "Justin Bieber", "Tiger Woods", "George Lucas", "Bill Cosby", "Arnold Palmer", "Meredith Viera", "Drew Carey", "Wayne Brady", "Dr. Greg House", "Ryan Seacrest", "Will Schuester", "Dr. Temperance Brennan"};
 		int randomExpert = (int) (experts.length * Math.random());
 		String expert = experts[randomExpert];
-		int originalconfidenceLevel = 97 + ((gm.getQ().getLevel()-1) * -5);
+		int originalconfidenceLevel = 97 + ((gm.getQ().getLevel()-1) * -4);
+		System.out.println(originalconfidenceLevel);
 		int confidenceLevel = originalconfidenceLevel;
-		int chance = (int) (15 * Math.random());
+		int chance = (int) (5 * Math.random());
 		if (((int)(2 * Math.random())) < 1 ) {
 			confidenceLevel += chance;
 		} else {
 			confidenceLevel -= chance;
 		}
+		System.out.println(confidenceLevel);
 		int random = (int) (100 * Math.random() + 1);
+		System.out.println(random);
 		if (random < confidenceLevel) {
 			expertAnswer = gm.getQ().getCorrectAnswer();
 		} else {
@@ -310,6 +315,9 @@ public class MillionaireGUI {
 				tempInt = newRandom;
 			}
 			expertAnswer = list[tempInt];
+			if (expertAnswer != gm.getQ().getCorrectAnswer()) {
+				originalconfidenceLevel -= 10;
+			}
 		}
 		System.out.println(expert + ": Hello, my answer is " + expertAnswer + ". I am " + originalconfidenceLevel + "% sure. Good luck!");
 	}
