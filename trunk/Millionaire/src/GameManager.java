@@ -27,10 +27,14 @@ public class GameManager {
 	 */
 	
 	public void correct () {
-		currentLevel ++;
-		winnings ++;
-		index ++;
-		setQ(index);
+		if (currentLevel != 15) {
+			currentLevel ++;
+			winnings ++;
+			index ++;
+			setQ(index);
+		} else {
+			System.out.println("Congratulations, you've won a million dollars!");
+		}
 	}
 	
 	public void incorrect () {

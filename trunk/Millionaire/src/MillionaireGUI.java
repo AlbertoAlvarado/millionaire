@@ -74,6 +74,7 @@ public class MillionaireGUI {
 		f.getContentPane().add(answerB);
 		f.getContentPane().add(answerC);
 		f.getContentPane().add(answerD);
+		f.getContentPane().setLayout(new GridBagLayout());
 		f.getContentPane().add(walkAway);
 		f.getContentPane().add(fiftyFifty);
 		f.getContentPane().add(pollAudience);
@@ -266,32 +267,65 @@ public class MillionaireGUI {
 		 * 	audience recommends randomly selected wrong answer
 		 */
 		String audienceAnswer = "";
+		String[] list = {"A", "B", "C", "D"};
+		int choice = 0;
 		int confidenceLevel = 97 + ((gm.getQ().getLevel()-1) * -5);
+		//line below is diagnostic, remove when finished
 		System.out.println(confidenceLevel);
 		int random = (int) (100 * Math.random() + 1);
+		//line below is diagnostic, remove when finished
 		System.out.println(random);
+		
 		if (random < confidenceLevel) {
 			audienceAnswer = gm.getQ().getCorrectAnswer();
 		} else {
-			String[] list = {"A", "B", "C", "D"};
 			boolean temp = true;
-			int tempInt = 0;
 			while (temp) {
 				int newRandom = (int) (4 * Math.random());
 				temp = list[newRandom].equals(gm.getQ().getCorrectAnswer());
-				tempInt = newRandom;
+				choice = newRandom;
 			}
-			audienceAnswer = list[tempInt];
+			audienceAnswer = list[choice];
 		}
-		System.out.println(audienceAnswer);
+		if (audienceAnswer.equals("A")) {
+			choice = 0;
+		} else if (audienceAnswer.equals("B")) {
+			choice = 1;
+		} else if (audienceAnswer.equals("C")) {
+			choice = 2;
+		} else if (audienceAnswer.equals("D")) {
+			choice = 3;
+		}
+		int[] percentages = {0, 0, 0, 0};
+		percentages[choice] = confidenceLevel;
+		int remaining = 100 - confidenceLevel;
+		for (int i = 0; i <= 3; i++) {
+			if (percentages[i] == 0) {
+				int percent = (int) (remaining * Math.random());
+				//line below is diagnostic, remove when finished
+				System.out.println(percent);
+				while (percent > confidenceLevel) {
+					percent = (int) (remaining * Math.random());
+				}
+				percentages[i] = percent;
+				remaining -= percent;
+			}
+		}
+		while (remaining > 0) {
+			int newRandom = (int) (4 * Math.random());
+			percentages[newRandom] ++;
+			remaining --;
+		}
+		System.out.println(percentages[0] + ", " + percentages[1] + ", " + percentages[2] + ", " + percentages[3]);
 	}
 	
 	public void updateExpert() {
 		String expertAnswer = "";
-		String[] experts = {"Emile Gleeson", "George Matter", "Ms. Martin", "Bill Nye", "Jared from Subway", "Mr. Rogers", "Barack Obama", "Steve Jobs", "Donald Trump", "Malcolm Gladwell", "Mr. Truax", "Albert Einstein", "Ichiro", "Mr. Carpenter", "Grant Brosndon", "Erik Carlson", "Mr. Kastl", "Billy Mays", "Oprah Winfrey", "Dr. Phil", "Bob Barker", "Shirley Temple", "Justin Bieber", "Tiger Woods", "George Lucas", "Bill Cosby", "Arnold Palmer", "Meredith Viera", "Drew Carey", "Wayne Brady", "Dr. Greg House", "Ryan Seacrest", "Will Schuester", "Dr. Temperance Brennan"};
+		String[] experts = {"Emile Gleeson", "George Matter", "Ms. Martin", "Bill Nye", "Jared from Subway", "Mr. Rogers", "Barack Obama", "Steve Jobs", "Donald Trump", "Malcolm Gladwell", "Mr. Truax", "Albert Einstein", "Ichiro", "Mr. Carpenter", "Grant Bronsdon", "Erik Carlson", "Mr. Kastl", "Billy Mays", "Oprah Winfrey", "Dr. Phil", "Bob Barker", "Shirley Temple", "Justin Bieber", "Tiger Woods", "George Lucas", "Bill Cosby", "Arnold Palmer", "Meredith Viera", "Drew Carey", "Wayne Brady", "Dr. Greg House", "Ryan Seacrest", "Will Schuester", "Dr. Temperance Brennan"};
 		int randomExpert = (int) (experts.length * Math.random());
 		String expert = experts[randomExpert];
 		int originalconfidenceLevel = 97 + ((gm.getQ().getLevel()-1) * -4);
+		//line below is diagnostic, remove when finished
 		System.out.println(originalconfidenceLevel);
 		int confidenceLevel = originalconfidenceLevel;
 		int chance = (int) (5 * Math.random());
@@ -300,8 +334,10 @@ public class MillionaireGUI {
 		} else {
 			confidenceLevel -= chance;
 		}
+		//line below is diagnostic, remove when finished
 		System.out.println(confidenceLevel);
 		int random = (int) (100 * Math.random() + 1);
+		//line below is diagnostic, remove when finished
 		System.out.println(random);
 		if (random < confidenceLevel) {
 			expertAnswer = gm.getQ().getCorrectAnswer();
@@ -359,8 +395,4 @@ public class MillionaireGUI {
 		f.setVisible(true);
 	}
 	
-//	public static void main (String[] args) {
-//		MillionaireGUI gui = new MillionaireGUI(gm);
-//		gui.launchFrame();
-//	}
 }
