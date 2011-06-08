@@ -2,9 +2,9 @@
 public class GameManager {
 	private int currentLevel;
 	private int winnings;
-	private boolean lifeline1Used;
-	private boolean lifeline2Used;
-	private boolean lifeline3Used;
+	private boolean fiftyFiftyUsed;
+	private boolean askAudienceUsed;
+	private boolean askExpertUsed;
 	private QuestionList qlist;
 	private int index;
 	private Question q;
@@ -13,9 +13,9 @@ public class GameManager {
 		this.index = 0;
 		currentLevel = index + 1;
 		winnings = 0;
-		lifeline1Used = false;
-		lifeline2Used = false;
-		lifeline3Used = false;
+		fiftyFiftyUsed = false;
+		askAudienceUsed = false;
+		askExpertUsed = false;
 		this.qlist = qlist;
 		this.q = qlist.getList().get(index);
 	}
@@ -55,29 +55,34 @@ public class GameManager {
 		int[] list = {0, 100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
 		return list[winnings];
 	}
+	
+	public int getQuestionAmount() {
+		int[] list = {0, 100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
+		return list[currentLevel];
+	}
+	
+	public boolean isFiftyFiftyUsed() {
+		return fiftyFiftyUsed;
+	}
+	
+	public void FiftyFiftyUsed() {
+		fiftyFiftyUsed = true;
+	}
+	
+	public boolean isAskAudienceUsed() {
+		return askAudienceUsed;
+	}
 
-	public boolean isLifeline1Used() {
-		return lifeline1Used;
+	public void askAudienceUsed() {
+		askAudienceUsed = true;
 	}
 	
-	public void Lifeline1Used() {
-		lifeline1Used = true;
+	public boolean isAskExpertUsed() {
+		return askExpertUsed;
 	}
 	
-	public boolean isLifeline2Used() {
-		return lifeline2Used;
-	}
-
-	public void Lifeline2Used() {
-		lifeline2Used = true;
-	}
-	
-	public boolean isLifeline3Used() {
-		return lifeline3Used;
-	}
-	
-	public void Lifeline3Used() {
-		lifeline3Used = true;
+	public void askExpertUsed() {
+		askExpertUsed = true;
 	}
 	
 	public Question getQ() {
